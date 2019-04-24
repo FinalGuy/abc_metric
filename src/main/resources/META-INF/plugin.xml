@@ -20,9 +20,9 @@
 
     <actions>
         <!-- Add your actions here -->
-        <group id="MyPlugin.SampleMenu" text="ABC-Metric" description="Greeting menu">
-            <add-to-group group-id="MainMenu" anchor="last"/>
-            <action id="Myplugin.Textboxes" class="th.foju.intellij.plugin.HelloAction" text="Analyse starten" description="Wendet die ABC-Metrik auf den aktuellen Code im Editor an"/>
-        </group>
+        <action id="EditorBasics.ABC-Metric" class="th.foju.intellij.plugin.InEditorAction" text="Apply ABC-Metric"
+                description="Starts code analysis for ABC metric.">
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+        </action>
     </actions>
 </idea-plugin>
