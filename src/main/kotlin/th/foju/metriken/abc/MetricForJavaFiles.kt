@@ -1,10 +1,10 @@
 package th.foju.metriken.abc
 
-class MetricForJavaFiles(val fileContent : String) : Metric {
+class MetricForJavaFiles : Metric {
 
     override fun analyse(content: String): Score {
-        fileContent.split("\n").stream()
-        return Score(0,0,0)
+        content.split("\n").stream()
+        return Score(0, 0, 0)
     }
 
 }

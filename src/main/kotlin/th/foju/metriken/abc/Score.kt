@@ -1,9 +1,11 @@
 package th.foju.metriken.abc
 
-class Score(val assignments: Int, val branches: Int, val conditions: Int) {
+import kotlin.math.pow
 
-    fun total() : Double {
-        return Math.sqrt(0.0)
+class Score(val assignments: Int, val branches: Int, val conditionals: Int) {
+
+    fun total(): Double {
+        return Math.sqrt(assignments.toDouble().pow(2) + branches.toDouble().pow(2) + conditionals.toDouble().pow(2))
     }
 
 }

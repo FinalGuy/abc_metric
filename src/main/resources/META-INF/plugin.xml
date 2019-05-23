@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>th.foju.abc_metric_plugin</id>
     <name>ABC metric</name>
-    <vendor email="torben.fojuth@posteo.de" url="http://www.yourcompany.com">YourCompany</vendor>
+    <vendor email="torben.fojuth@posteo.de" url="http://www.neuland-bfi.de">neuland - Büro für Informatik</vendor>
 
     <description><![CDATA[
     Enter short description for your plugin here.<br>
@@ -22,7 +22,7 @@
         <!-- Add your actions here -->
         <action id="EditorBasics.ABC-Metric"
                 class="th.foju.intellij.plugin.InEditorAction"
-                text="Apply ABC-Metric"
+                text="ABC-Metric"
                 description="Starts code analysis for ABC metric.">
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
         </action>
