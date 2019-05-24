@@ -28,10 +28,14 @@ class InEditorAction : AnAction("Hallo") {
             val metric = metricProvider.metricFor(type)
             val score = metric.analyse(text)
             val message =
-                "Found file of type ${type.name} with ${text.length} characters on ${document.lineCount} lines.\nAnalysis results are:\n ...\n ... \n ...\n Score: ${score.total()}"
+                "Found file of type ${type.name} with ${text.length} characters on ${document.lineCount} lines.\nAnalysis results are:\n\n"+
+                        "Assignments:\t${score.assignments}\n"+
+                        "Branches:\t\t${score.branches}\n"+
+                        "Conditionals:\t${score.conditionals}\n\n"+
+                        "Overall score:\t${score.total()}"
             Messages.showMessageDialog(project, message, "Results for abc-metric", Messages.getInformationIcon())
         } catch (e: UnknownFileType) {
-            Messages.showErrorDialog("unknown file type", "unknown file type")
+            Messages.showErrorDialog("Unable to analyse files of type ${e.fileType.name}. Feature is not yet implemented for those file types.","Unknown file type")
         }
 
     }
