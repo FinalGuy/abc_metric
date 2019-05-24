@@ -3,78 +3,19 @@ package th.foju.metriken.abc.java
 import com.intellij.psi.PsiFile
 import th.foju.metriken.abc.Metric
 import th.foju.metriken.abc.Score
-import java.util.*
 
 class MetricForJavaFiles : Metric {
 
     override fun analyse(content: PsiFile): Score {
-//        var assignments = 0
-//        var branches = 0
-//        var conditionals = 0
-//        val tokens = StringTokenizer(content)
-//        while (tokens.hasMoreTokens()) {
-//            val token = tokens.nextToken()
-//            if (isAssignment(token)) {
-//                assignments = assignments.inc()
-//            }
-//            if (isBranch(token)) {
-//                branches = branches.inc()
-//            }
-//            if (isConditional(token)) {
-//                conditionals = conditionals.inc()
-//            }
-//        }
-//        return Score(assignments, branches, conditionals)
-        val assignmentCountingJavaRecursiveElementVisitor = AssignmentCountingJavaRecursiveElementVisitor()
-        content.accept(assignmentCountingJavaRecursiveElementVisitor)
-        val assignments = assignmentCountingJavaRecursiveElementVisitor.count()
-        return Score(assignments,0,0)
-    }
+        val assignmentsCounter = AssignmentCountingJavaRecursiveElementVisitor()
+        // branches
+        val conditionalsCounter = ConditionalCountingJavaRecursiveElementVisitor()
 
-    private fun isAssignment(token: String): Boolean {
-        return when (token) {
-            "=" -> true
-            "*=" -> true
-            "/=" -> true
-            "%=" -> true
-            "+=" -> true
-            "<<=" -> true
-            ">>=" -> true
-            "&=" -> true
-            "|=" -> true
-            "^=" -> true
-            ">>>=" -> true
-            "++" -> true
-            "--" -> true
-            else -> false
-        }
-    }
+        content.accept(assignmentsCounter)
+        // branches
+        content.accept(conditionalsCounter)
 
-    private fun isBranch(token: String): Boolean {
-        return when (token) {
-            "new" -> true
-            //TODO
-            else -> false
-        }
-    }
-
-    private fun isConditional(token: String): Boolean {
-        return when (token) {
-            "==" -> true
-            "!=" -> true
-            "<=" -> true
-            ">=" -> true
-            "<" -> true
-            ">" -> true
-            "if" -> true
-            "else" -> true
-            "case" -> true
-            "default" -> true
-            "try" -> true
-            "catch" -> true
-            "?" -> true
-            else -> false
-        }
+        return Score(assignmentsCounter.count(), 0, conditionalsCounter.count())
     }
 
 }

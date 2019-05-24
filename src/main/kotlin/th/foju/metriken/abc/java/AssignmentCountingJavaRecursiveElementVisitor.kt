@@ -13,7 +13,7 @@ class AssignmentCountingJavaRecursiveElementVisitor : JavaRecursiveElementVisito
 
     override fun visitAssignmentExpression(expression: PsiAssignmentExpression?) {
         super.visitAssignmentExpression(expression)
-        println("Assignment gefunden: "+expression?.textRange)
+        println("Assignment gefunden: "+expression?.text + " " +expression?.textRange)
         numberOfAssignments++
     }
 
