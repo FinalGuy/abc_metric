@@ -1,27 +1,34 @@
-package th.foju.metriken.abc
+package th.foju.metriken.abc.java
 
+import com.intellij.psi.PsiFile
+import th.foju.metriken.abc.Metric
+import th.foju.metriken.abc.Score
 import java.util.*
 
 class MetricForJavaFiles : Metric {
 
-    override fun analyse(content: String): Score {
-        var assignments = 0
-        var branches = 0
-        var conditionals = 0
-        val tokens = StringTokenizer(content)
-        while (tokens.hasMoreTokens()) {
-            val token = tokens.nextToken()
-            if (isAssignment(token)) {
-                assignments = assignments.inc()
-            }
-            if (isBranch(token)) {
-                branches = branches.inc()
-            }
-            if (isConditional(token)) {
-                conditionals = conditionals.inc()
-            }
-        }
-        return Score(assignments, branches, conditionals)
+    override fun analyse(content: PsiFile): Score {
+//        var assignments = 0
+//        var branches = 0
+//        var conditionals = 0
+//        val tokens = StringTokenizer(content)
+//        while (tokens.hasMoreTokens()) {
+//            val token = tokens.nextToken()
+//            if (isAssignment(token)) {
+//                assignments = assignments.inc()
+//            }
+//            if (isBranch(token)) {
+//                branches = branches.inc()
+//            }
+//            if (isConditional(token)) {
+//                conditionals = conditionals.inc()
+//            }
+//        }
+//        return Score(assignments, branches, conditionals)
+        val assignmentCountingJavaRecursiveElementVisitor = AssignmentCountingJavaRecursiveElementVisitor()
+        content.accept(assignmentCountingJavaRecursiveElementVisitor)
+        val assignments = assignmentCountingJavaRecursiveElementVisitor.count()
+        return Score(assignments,0,0)
     }
 
     private fun isAssignment(token: String): Boolean {

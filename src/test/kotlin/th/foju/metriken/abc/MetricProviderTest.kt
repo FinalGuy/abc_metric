@@ -4,6 +4,7 @@ import com.intellij.ide.highlighter.JavaFileType
 import com.intellij.openapi.fileTypes.PlainTextFileType
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
+import th.foju.metriken.abc.java.MetricForJavaFiles
 
 internal class MetricProviderTest {
 

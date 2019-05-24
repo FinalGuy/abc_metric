@@ -1,12 +1,7 @@
 package th.foju.intellij.plugin
 
-import com.intellij.openapi.actionSystem.AnAction
-import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.openapi.actionSystem.CommonDataKeys
-import com.intellij.openapi.actionSystem.PlatformDataKeys
+import com.intellij.openapi.actionSystem.*
 import com.intellij.openapi.ui.Messages
-import th.foju.metriken.abc.Metric
-import th.foju.metriken.abc.MetricForJavaFiles
 import th.foju.metriken.abc.MetricProvider
 import th.foju.metriken.abc.UnknownFileType
 
@@ -25,8 +20,8 @@ class InEditorAction : AnAction("ABC-Metric") {
         val text = document.text
 
         try {
-            val metric = metricProvider.metricFor(type)
-            val score = metric.analyse(text)
+            val psiFile = event.getData(DataKeys.PSI_FILE)?:throw IllegalStateException()
+            val score = metricProvider.metricFor(type).analyse(psiFile)
             val message =
                 "Found file of type ${type.name} with ${text.length} characters on ${document.lineCount} lines.\nAnalysis results are:\n\n"+
                         "Assignments:\t${score.assignments}\n"+

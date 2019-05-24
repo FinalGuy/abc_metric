@@ -1,7 +1,9 @@
 package th.foju.metriken.abc
 
+import com.intellij.psi.PsiFile
+
 interface Metric {
 
-    fun analyse(content: String): Score
+    fun analyse(content: PsiFile): Score
 
 }
