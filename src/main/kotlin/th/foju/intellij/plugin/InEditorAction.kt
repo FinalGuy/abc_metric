@@ -11,7 +11,7 @@ import th.foju.metriken.abc.MetricProvider
 import th.foju.metriken.abc.UnknownFileType
 
 
-class InEditorAction : AnAction("Hallo") {
+class InEditorAction : AnAction("ABC-Metric") {
 
     val metricProvider = MetricProvider()
 
